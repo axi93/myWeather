@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/axi93/myWeather/routers"
+	"github.com/axi93/myWeather/service"
 )
 
 func main() {
@@ -13,9 +13,9 @@ func main() {
 		fmt.Println("Give me a country")
 		return
 	}
-	body := routers.CheckCountry()
-
-	json := routers.ConvertJson(body)
-
-	routers.ObtainSports(json)
+	coor, err := service.Check()
+	if err != nil {
+		fmt.Printf("Error:%s", err)
+	}
+	service.ObtainSports(coor)
 }
