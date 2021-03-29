@@ -12,21 +12,21 @@ import (
 )
 
 func Check() (models.Coordenadas, error) {
-
-	country := os.Args[1]
-	//fmt.Println(country)
-	body := api.ObtainWeather(country)
+	city := os.Args[1]
+	body := api.ObtainWeather(city)
 
 	if strings.Contains(body, "404") {
-		return models.Coordenadas{}, errors.New("city not found")
+		return models.Coordenadas{}, errors.New(" city not found, please enter a valid city ")
 	}
+
 	return convertJson(body)
 }
 
 func convertJson(body string) (models.Coordenadas, error) {
-	//hacer en models un test superior para no tratar de hacer replace de nada
 	replace1 := strings.ReplaceAll(body, "test(", "")
 	body = strings.ReplaceAll(replace1, ")", "")
+	body = strings.ReplaceAll(body, "[", "")
+	body = strings.ReplaceAll(body, "]", "")
 
 	var jsonWeather = []byte(body)
 
@@ -40,7 +40,6 @@ func convertJson(body string) (models.Coordenadas, error) {
 }
 
 func ObtainSports(c models.Coordenadas) {
-	fmt.Println(c.Main.Temp)
 	if c.Main.Temp >= 15 && c.Main.Temp <= 19.99 {
 		fmt.Println("You can do exercise outdoor")
 	} else if c.Main.Temp >= 10 && c.Main.Temp <= 14.99 {

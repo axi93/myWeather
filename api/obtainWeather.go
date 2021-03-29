@@ -15,12 +15,6 @@ func ObtainWeather(weather string) string {
 	req.Header.Add("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
 
 	res, _ := http.DefaultClient.Do(req)
-	/*
-		if res.StatusCode != 200 {
-			fmt.Println("TODO OK")
-
-		}
-	*/
 
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)

@@ -5,7 +5,7 @@ type Coordenadas struct {
 		Lon float64 `json:"lon"`
 		Lat float64 `json:"lat"`
 	} `json:"coord"`
-	Weather []struct {
+	Weather struct {
 		ID          int    `json:"id"`
 		Main        string `json:"main"`
 		Description string `json:"description"`
